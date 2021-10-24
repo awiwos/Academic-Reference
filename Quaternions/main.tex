@@ -1,0 +1,43 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{Quaternions}
+\author{awiwos}
+\date{}
+\begin{document}
+
+\maketitle
+
+\section*{Basic Quaternion Math}
+Quaterion numbers are of the form: 
+$$q = a + bi + cj + dk$$
+Where $a$, $b$, $c$, $d$ $\in$ $\mathbb{R}$ and $i$, $j$, $k$ are imaginary units i.e. $i^2 = j^2 = k^2 = -1$. Note that multiplication by the imaginary units do not commute (and so multiplications of quaternions do not commute). Instead they have similar properties to the cross product on the cartesian basis vectors i.e:
+\begin{align*}
+    ij &= k & ji &= -k \\
+    jk &= i & kj &= -i\\
+    ki &= j & ik &= -j
+\end{align*}
+Therefore, the quaternion product of arbitrary quaternions $q_1 = a_1 + b_1 i + c_1 j + d_1 k$ and $q_2 = a_2 + b_2 i + c_2 j + d_2 k$ is reduced to the following:
+\begin{align*}
+    q &= q_1 q_2\\
+    q &= \left(a_1 + b_1 i + c_1 j + d_1 k\right) \left( a_2 + b_2 i + c_2 j + d_2 k\right)\\
+    q &= a_1 \left( a_2 + b_2 i + c_2 j + d_2 k\right) \\
+    &+ b_1 i \left( a_2 + b_2 i + c_2 j + d_2 k\right) \\
+    &+ c_1 j \left( a_2 + b_2 i + c_2 j + d_2 k\right) \\
+    &+ d_1 k \left( a_2 + b_2 i + c_2 j + d_2 k\right) \\
+    q &= a_1 a_2 - b_1 b_2 - c_1 c_2 - d_1 d_2 \\
+    &+ \left( a_1 b_2 + b_1 a_2 + c_1 d_2 - d_1 c_2\right) i\\
+    &+ \left( a_1 c_2 - b_1 d_2 + c_1 a_2 + d_1 b_2\right) j\\
+    &+ \left( a_1 d_2 + b_1 c_2 - c_1 b_2 + d_1 a_2\right) k\\
+\end{align*}
+
+\noindent
+For the sake of notation, quaternions are going to be written in this vector form: $$ q = \begin{bmatrix}a & b & c & d \end{bmatrix} $$
+
+\section*{Rotations}
+Unit quaternions can be used to represent rotations of $\theta$ around the axis of unit vector (in cartesian space) $\mathbf{u}$ as: $$ q = \left[ \cos{\frac{\theta}{2}} , \mathbf{u} \sin{\frac{\theta}{2}}\right]$$
+It is relatively trivial to show that as long as $\mathbf{u}$ is a unit vector then q is a unit quaternion i.e. $a^2 + b^2 + c^2 +d^2 = 1 \iff ||\mathbf{u}|| = 1$. This makes it easy to calculate the inverse of a rotational quaternion. If we designate the conjugate of a quaternion $\bar{q} = \begin{bmatrix}a & -b & -c & -d \end{bmatrix}$, the general expression for the inverse of a quaternion is:
+$$q^{-1} = \frac{\bar{q}}{||q||} $$
+\end{document}
